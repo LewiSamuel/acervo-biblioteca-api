@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const Obra = require("../model/obra");
 
 module.exports = {
@@ -10,12 +11,22 @@ module.exports = {
     /****************************/
 
     async list(req, res){ 
-        
+        var varWhere = {
+            [Op.or]: [{
+                        Titulo: { [Op.like]: '%' + req.body.Search + '%' }
+                    },
+                    {
+                        Descricao: { [Op.like]: '%' + req.body.Search + '%' }
+                    },
+                    {
+                        Biblioteca: { [Op.like]: '%' + req.body.Search + '%' }
+                    }]
+        };
         await Obra.findAll({
             order: [
                 ['id', 'ASC'],
             ],
-            where: req.body
+            where: varWhere
         }).then(result => {
             return res.send(result);
         }).catch(err => {

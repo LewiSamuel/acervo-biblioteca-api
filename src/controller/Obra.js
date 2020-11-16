@@ -11,6 +11,8 @@ module.exports = {
     /****************************/
 
     async list(req, res){ 
+        req.body.Search === undefined || req.body.Search === null ? req.body.Search = "" : console.log(req.body);
+
         var varWhere = {
             [Op.or]: [{
                         Titulo: { [Op.like]: '%' + req.body.Search + '%' }

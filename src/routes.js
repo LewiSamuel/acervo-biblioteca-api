@@ -14,6 +14,7 @@ const Obra = require('./controller/Obra');
 routes.post("/obra/save",     Obra.save);
 routes.post("/obra/update",   Obra.update);
 routes.post("/obra/list",     Obra.list);
+routes.get("/obra/list",     Obra.list);
 routes.post("/obra/list/:id", Obra.listOne);
 routes.post("/obra/delete",   Obra.delete);
 
